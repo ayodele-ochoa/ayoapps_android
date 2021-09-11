@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RoomDatabaseActivity"
+        android:layout_marginTop="5dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/topLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/high_yella">
+
+            <EditText
+                android:id="@+id/editFirstName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:backgroundTint="@color/sky_blue"
+                android:textColor="@color/black"
+                android:layout_weight="40"
+                android:inputType="textCapWords"
+
+
+                />
+
+            <EditText
+                android:id="@+id/editLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:backgroundTint="@color/sky_blue"
+                android:textColor="@color/black"
+                android:layout_weight="40"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/editGrade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Grade"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:backgroundTint="@color/sky_blue"
+                android:textColor="@color/black"
+                android:layout_weight="20"
+                android:inputType="number" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/high_yella"
+            android:layout_below="@+id/topLinearLayout">
+            <Button
+                android:id="@+id/btnDeleteTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLEAR DATABASE"
+                android:textColor="@color/sky_blue"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:id="@+id/btnAddStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD STUDENT"
+                android:textColor="@color/sky_blue"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentRight="true"
+
+                android:layout_margin="10dp" />
+
+
+        </RelativeLayout>
+
+        <!--<Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD STUDENT"
+            android:backgroundTint="@color/sky_blue"
+            android:layout_margin="15dp"
+            android:background="@drawable/rounded_corners"/>-->
+
+        <ListView
+            android:id="@+id/databaseListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topLayout"
+            />
+
+         <androidx.fragment.app.FragmentContainerView
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/knowledge_fragment"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+
+             />
+
+
+    </RelativeLayout>
+</layout>
