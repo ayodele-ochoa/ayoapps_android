@@ -16,7 +16,7 @@ import com.ayodeleochoa.ayoapps.PhotoGalleryActivity
 import com.ayodeleochoa.ayoapps.R
 import com.ayodeleochoa.ayoapps.RoomDatabaseActivity
 
- class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
 
     // create new views
@@ -91,7 +91,7 @@ import com.ayodeleochoa.ayoapps.RoomDatabaseActivity
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView)
     {
-        val imageView: ImageView = itemView.findViewById(R.id.imageview)
-        val textView: TextView = itemView.findViewById(R.id.textView)
+        val imageView: ImageView = itemView.findViewById(R.id.main_imageview)
+        val textView: TextView = itemView.findViewById(R.id.main_textView)
     }
 }

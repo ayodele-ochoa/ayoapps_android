@@ -1,48 +1,29 @@
 package com.ayodeleochoa.ayoapps
 
+import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.room.Room
-import com.ayodeleochoa.ayoapps.models.AppDatabase
-import com.ayodeleochoa.ayoapps.models.Student
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.count
-
-import android.app.Activity
-import android.app.AlertDialog
-
-import android.os.AsyncTask
-import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.TypedValue
-import android.view.KeyEvent
-import android.view.View.inflate
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.res.ColorStateListInflaterCompat.inflate
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.ayodeleochoa.ayoapps.databinding.ActivityRoomDatabaseBinding
-import com.ayodeleochoa.ayoapps.models.MainAdapter
-import com.ayodeleochoa.ayoapps.models.StudentDao
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import java.lang.ref.WeakReference
+import androidx.room.Room
+import com.ayodeleochoa.ayoapps.models.AppDatabase
+import com.ayodeleochoa.ayoapps.models.Student
 
 
 class RoomDatabaseActivity : AppCompatActivity()
 {
-    private lateinit var binding: ActivityRoomDatabaseBinding
+   // private lateinit var binding: ActivityRoomDatabaseBinding
     lateinit var listView: ListView
     var students: MutableList<Student> = ArrayList()
    // var arrayList: ArrayList<MyData> = ArrayList()
@@ -58,9 +39,9 @@ class RoomDatabaseActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        binding = ActivityRoomDatabaseBinding.inflate(layoutInflater)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_room_database)
-
+      //  binding = ActivityRoomDatabaseBinding.inflate(layoutInflater)
+      //  binding = DataBindingUtil.setContentView(this, R.layout.activity_room_database)
+        setContentView(R.layout.activity_room_database)
       //  setContentView(binding.root)
 
         var db = Room.databaseBuilder(
@@ -94,52 +75,15 @@ class RoomDatabaseActivity : AppCompatActivity()
         val editLastName = findViewById<EditText>(R.id.editLastName)
         val editGrade = findViewById<EditText>(R.id.editGrade)
 
-        // Handle enter/done button being pressed
-        editFirstName.setOnKeyListener { v, keyCode, event ->
-            when {
-                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
-                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
-
-                    binding.btnAddStudent.performClick()
-                    //return true
-                    return@setOnKeyListener true
-                }
-                else -> false
-            }
-        }
-        editLastName.setOnKeyListener { v, keyCode, event ->
-            when {
-                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
-                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
-
-                    binding.btnAddStudent.performClick()
-                    //return true
-                    return@setOnKeyListener true
-                }
-                else -> false
-            }
-        }
-        editGrade.setOnKeyListener { v, keyCode, event ->
-            when {
-                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
-                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
-
-                    binding.btnAddStudent.performClick()
-                    //return true
-                    return@setOnKeyListener true
-                }
-                else -> false
-            }
-        }
-
         // Add button functionality
-        binding.btnAddStudent.setOnClickListener()
-        {
+        val btnAddStudent = findViewById(R.id.btnAddStudent) as Button
+        btnAddStudent.setOnClickListener {
+
             println("AddStudent button clicked.")
 
             val firstName: String = editFirstName?.text.toString()
             val lastName: String = editLastName?.text.toString()
-            val grade = editGrade?.text.toString()
+            val grade: String = editGrade?.text.toString()
             var intGrade = 0
             if (grade.length > 0)
             {
@@ -151,12 +95,12 @@ class RoomDatabaseActivity : AppCompatActivity()
             if (firstName.length > 0 && lastName.length > 0 && grade != null)
             {
                 AddStudent(firstName, lastName, intGrade)
-                editFirstName.clearFocus()
-                editFirstName.text.clear()
-                editLastName.clearFocus()
-                editLastName.text.clear()
-                editGrade.clearFocus()
-                editGrade.text.clear()
+                editFirstName?.clearFocus()
+                editFirstName?.text?.clear()
+                editLastName?.clearFocus()
+                editLastName?.text?.clear()
+                editGrade?.clearFocus()
+                editGrade?.text?.clear()
 
                 hideSoftKeyboard()
 
@@ -169,11 +113,10 @@ class RoomDatabaseActivity : AppCompatActivity()
                 val toast = Toast.makeText(context, "Please input all sections", Toast.LENGTH_LONG)
                 toast.show()
             }
-
         }
 
-        binding.btnDeleteTable.setOnClickListener()
-        {
+        val btnDeleteTable = findViewById(R.id.btnDeleteTable) as Button
+        btnDeleteTable.setOnClickListener {
             studentDao.deleteAll();
             students.clear();
             adapter?.notifyDataSetChanged();
@@ -183,30 +126,50 @@ class RoomDatabaseActivity : AppCompatActivity()
             val toast = Toast.makeText(context, "Database table cleared.", Toast.LENGTH_LONG)
             toast.show()
         }
-        /*val addStudentButton = findViewById(R.id.btnAddStudent) as Button
-        addStudentButton.setOnClickListener {
-            println("AddStudent button clicked.")
 
 
-            val firstName: String = editFirstName?.text.toString()
-            val lastName: String = editLastName?.text.toString()
-            val grade:Int = editGrade?.text.toString().toInt()
 
-            AddStudent(firstName, lastName, grade)
-        }*/
+        // Handle enter/done button being pressed
+        editFirstName.setOnKeyListener { v, keyCode, event ->
+            when {
+                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
+                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
 
-        /*val addButton = findViewById(R.id.btnSaveDatabase) as Button
-        addButton.setOnClickListener {
-            println("Add button clicked.")
-           *//* val databaseFragment = DatabaseFragment()
-            val fragmentManager: FragmentManager = supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.database_fragment, databaseFragment)
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .commit()*//*
-        }*/
+                    btnAddStudent.performClick()
 
+                    //return true
+                    return@setOnKeyListener true
+                }
+                else -> false
+            }
+        }
+        editLastName.setOnKeyListener { v, keyCode, event ->
+            when {
+                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
+                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
+
+                    btnAddStudent.performClick()
+                    //return true
+                    return@setOnKeyListener true
+                }
+                else -> false
+            }
+        }
+        editGrade.setOnKeyListener { v, keyCode, event ->
+            when {
+                //Check if it is the Enter-Key,      Check if the Enter Key was pressed down
+                ((keyCode == KeyEvent.KEYCODE_ENTER) && (event.action == KeyEvent.ACTION_DOWN)) -> {
+
+                    btnAddStudent.performClick()
+                    //return true
+                    return@setOnKeyListener true
+                }
+                else -> false
+            }
+        }
     }
+
+
 
     fun Activity.hideSoftKeyboard(){
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
@@ -233,6 +196,8 @@ class RoomDatabaseActivity : AppCompatActivity()
         listView.adapter = adapter
 
     }
+
+
 }
 
 //Class MyAdapter

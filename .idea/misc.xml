@@ -12,8 +12,10 @@
         <entry key="app/src/main/res/layout/fragment_database.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.18659420289855072" />
         <entry key="app/src/main/res/layout/fragment_knowledge.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/image_slider_layout.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/item_repo.xml" value="0.12291666666666666" />
         <entry key="app/src/main/res/layout/main_card_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/photo_row_item.xml" value="0.165" />
       </map>
     </option>
   </component>
