@@ -35,6 +35,8 @@ class RoomDatabaseActivity : AppCompatActivity()
     var editGrade: EditText? = null
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?)
     {

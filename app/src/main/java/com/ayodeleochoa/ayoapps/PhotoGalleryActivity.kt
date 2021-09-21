@@ -7,6 +7,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.ui.AppBarConfiguration
@@ -47,15 +49,17 @@ class PhotoGalleryActivity : AppCompatActivity()
 
         val context = this
 
-        setupViewModel()
+        val knowledgeFragment = DatabaseFragment()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.knowledge_fragment, knowledgeFragment)
+            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .commit()
+
+      //  setupViewModel()
         // setupUI()
-        setupObservers()
+      //  setupObservers()
 
-
-
-        imageList.add("http://ayodeleochoa.com/api_photos/rick_and_morty3.png")
-        imageList.add("https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg")
-        imageList.add("https://media.istockphoto.com/photos/child-hands-formig-heart-shape-picture-id951945718?k=6&m=951945718&s=612x612&w=0&h=ih-N7RytxrTfhDyvyTQCA5q5xKoJToKSYgdsJ_mHrv0=")
 
     }
 
@@ -72,7 +76,7 @@ class PhotoGalleryActivity : AppCompatActivity()
 
 
 
-    private fun setupViewModel()
+    public fun setupViewModel()
     {
         viewModel = ViewModelProviders.of(
             this,
@@ -92,7 +96,7 @@ class PhotoGalleryActivity : AppCompatActivity()
         recyclerView.adapter = adapter
     }*/
 
-    private fun setupObservers() {
+    public fun setupObservers() {
         viewModel.getPhotos().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {

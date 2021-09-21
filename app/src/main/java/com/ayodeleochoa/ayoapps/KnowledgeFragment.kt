@@ -1,15 +1,13 @@
 package com.ayodeleochoa.ayoapps
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +23,7 @@ class DatabaseFragment : Fragment()
 {
 
     var viewedDescription = false
+    var currentActivity = activity?.javaClass?.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,18 +56,20 @@ class DatabaseFragment : Fragment()
         if (viewedDescription == false) {
 
 
-            val currentActivity = activity?.javaClass?.simpleName
+            currentActivity = activity?.javaClass?.simpleName
             println("currentActivity = " + currentActivity)
 
+            val txtDescription = view.findViewById(R.id.txtDescription) as TextView
+            val txtDescription2 = view.findViewById(R.id.txtDescription2) as TextView
+
             if (currentActivity == "RoomDatabaseActivity") {
-                val txtDescription = view.findViewById(R.id.txtDescription) as TextView
-                val txtDescription2 = view.findViewById(R.id.txtDescription2) as TextView
+
                 val descriptionText =
                     "This exercise saves persistent data onto a Room (SQLite) database. " +
                             "Enter in the new student's first and last name, along with their grade and then click add student." +
                             "The new student will be added to the database and the listview will be updated to reflect the current" +
                             "list of students. Click on clear database to reset the database."
-                val descriptionText2 = "This excersize include the following features: \n" +
+                val descriptionText2 = "This exercise include the following features: \n" +
                         "Room (SQLite) persistent data \n" +
                         "Data Binding \n" +
                         "Listview \n" +
@@ -77,9 +78,8 @@ class DatabaseFragment : Fragment()
                         "Buttons"
                 txtDescription.text = descriptionText
                 txtDescription2.text = descriptionText2
-            } else if (currentActivity == "AccessibilityActivity") {
-                val txtDescription = view.findViewById(R.id.txtDescription) as TextView
-                val txtDescription2 = view.findViewById(R.id.txtDescription2) as TextView
+            }
+            else if (currentActivity == "AccessibilityActivity") {
                 val descriptionText =
                     "This exercise illustrates implementations of accessibility features " +
                             "to make the app easier to navigate for those with possible vision and/or motor impairments. " +
@@ -92,12 +92,54 @@ class DatabaseFragment : Fragment()
                 txtDescription.text = descriptionText
                 txtDescription2.text = descriptionText2
             }
+            else if (currentActivity == "PhotoGalleryActivity") {
+                val descriptionText =
+                    "This exercise displays a photo gallery within an automatically sliding view. The url's and titles " +
+                            "are stored in a remote json file that is retrieved via an api rest request. Swipe left or right " +
+                            "to manually switch images"
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Kotlin Coroutine \n" +
+                            "Retrofit \n" +
+                            "Squareup Picasso \n" +
+                            "Smartiest AutoImageSlider \n" +
+                            "Progress Bar \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
+            else if (currentActivity == "GoogleMapsActivity") {
+                val descriptionText =
+                    "This exercise displays the use of the Google Maps SDK for Android, Google Places and the Google " +
+                            "directions API. On the load of activity, after permission is granted, the app will locate " +
+                            "and display your current location on the Google Map. Enter the name or address of a " +
+                            "location into the EditText box and the directions from your location to the entered " +
+                            "destination will be displayed on the map, along with the distance to that destination.  "
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Google Maps SDK \n" +
+                            "Google Places \n" +
+                            "Google Directions API \n" +
+                            "Android Location \n" +
+                            "Android Permissions \n" +
+                            "AsyncTask \n" +
+                            "EditText \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
 
             viewedDescription = true
 
 
             val gotItButton = view.findViewById(R.id.btnGotItDB) as Button
             gotItButton.setOnClickListener {
+
+                if (currentActivity == "PhotoGalleryActivity")
+                {
+                    (activity as PhotoGalleryActivity?)!!.setupViewModel()
+                    (activity as PhotoGalleryActivity?)!!.setupObservers()
+                }
 
                 val fragment = fragmentManager?.findFragmentById(R.id.knowledge_fragment)
                 if (fragment != null) {
@@ -120,9 +162,7 @@ class DatabaseFragment : Fragment()
 
     override fun onDestroy()
     {
-
         super.onDestroy()
-
     }
 
     companion object {

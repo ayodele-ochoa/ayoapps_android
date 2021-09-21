@@ -5,7 +5,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +15,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AyoApps">
+        android:theme="@style/Theme.AyoApps"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".views.GoogleMapsActivity"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB3j7dvDDgSpU4dTr5eOp1oyIqo_mfW3mo" />
+
+        <!--<service
+            android:name="MyNavigationService"
+            android:foregroundServiceType="location" ... >
+        &lt;!&ndash; Any inner elements would go here. &ndash;&gt;
+    </service>-->
+
         <activity
             android:name=".PhotoGalleryActivity"
             android:exported="true"

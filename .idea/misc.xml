@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/rounded_corners.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_accessibility.xml" value="0.1322463768115942" />
+        <entry key="app/src/main/res/layout/activity_google_maps.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_photo_gallery.xml" value="0.267840593141798" />
         <entry key="app/src/main/res/layout/activity_room_database.xml" value="0.21105072463768115" />

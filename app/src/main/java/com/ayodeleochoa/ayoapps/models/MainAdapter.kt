@@ -15,6 +15,7 @@ import com.ayodeleochoa.ayoapps.AccessibilityActivity
 import com.ayodeleochoa.ayoapps.PhotoGalleryActivity
 import com.ayodeleochoa.ayoapps.R
 import com.ayodeleochoa.ayoapps.RoomDatabaseActivity
+import com.ayodeleochoa.ayoapps.views.GoogleMapsActivity
 
 class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
@@ -73,6 +74,13 @@ class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter
             else if (position == 2)
             {
                 val intent = Intent(activity.applicationContext, PhotoGalleryActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                activity.applicationContext.startActivity(intent)
+
+            }
+            else if (position == 3)
+            {
+                val intent = Intent(activity.applicationContext, GoogleMapsActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 activity.applicationContext.startActivity(intent)
 
