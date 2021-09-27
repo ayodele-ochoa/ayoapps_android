@@ -15,7 +15,9 @@ import com.ayodeleochoa.ayoapps.AccessibilityActivity
 import com.ayodeleochoa.ayoapps.PhotoGalleryActivity
 import com.ayodeleochoa.ayoapps.R
 import com.ayodeleochoa.ayoapps.RoomDatabaseActivity
+import com.ayodeleochoa.ayoapps.views.BluetoothActivity
 import com.ayodeleochoa.ayoapps.views.GoogleMapsActivity
+import com.ayodeleochoa.ayoapps.views.MediaActivity
 
 class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
@@ -81,6 +83,20 @@ class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter
             else if (position == 3)
             {
                 val intent = Intent(activity.applicationContext, GoogleMapsActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                activity.applicationContext.startActivity(intent)
+
+            }
+            else if (position == 4)
+            {
+            val intent = Intent(activity.applicationContext, BluetoothActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            activity.applicationContext.startActivity(intent)
+
+            }
+            else if (position == 6)
+            {
+                val intent = Intent(activity.applicationContext, MediaActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 activity.applicationContext.startActivity(intent)
 

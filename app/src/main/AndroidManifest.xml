@@ -4,10 +4,19 @@
     android:hardwareAccelerated="true">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,19 +27,27 @@
         android:theme="@style/Theme.AyoApps"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".views.MediaActivity"
+            android:exported="true"
+            android:label="@string/title_activity_media"
+            android:theme="@style/Theme.AyoApps.NoActionBar" />
+        <activity
             android:name=".views.GoogleMapsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".views.BluetoothActivity"
             android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB3j7dvDDgSpU4dTr5eOp1oyIqo_mfW3mo" />
-
-        <!--<service
+        <!--
+<service
             android:name="MyNavigationService"
             android:foregroundServiceType="location" ... >
         &lt;!&ndash; Any inner elements would go here. &ndash;&gt;
-    </service>-->
-
+    </service>
+        -->
         <activity
             android:name=".PhotoGalleryActivity"
             android:exported="true"

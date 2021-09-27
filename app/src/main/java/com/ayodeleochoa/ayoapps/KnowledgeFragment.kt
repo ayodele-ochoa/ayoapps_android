@@ -128,6 +128,25 @@ class DatabaseFragment : Fragment()
                 txtDescription.text = descriptionText
                 txtDescription2.text = descriptionText2
             }
+            else if (currentActivity == "BluetoothActivity") {
+                val descriptionText =
+                    "This exercise displays the use of Android's bluetooth features. Turn the device's " +
+                            "bluetooth on and off without going to the settings menu. Make the device's " +
+                            "bluetooth discoverable to be able to pair with another bluetooth device. " +
+                            "Discover other bluetooth devices available in the area. Get a list of " +
+                            "bluetooth devices that you are currently paired with."
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Bluetooth Adapter \n" +
+                            "Bluetooth Devices \n" +
+                            "Listview \n" +
+                            "Buttons \n" +
+                            "Android Permissions \n" +
+                            "Toasts \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
 
             viewedDescription = true
 

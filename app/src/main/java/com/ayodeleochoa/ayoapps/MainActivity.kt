@@ -8,12 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ayodeleochoa.ayoapps.models.MainAdapter
 import com.ayodeleochoa.ayoapps.models.MainViewModel
-import android.app.Activity
-
-import android.util.DisplayMetrics
-import android.widget.LinearLayout
-import androidx.cardview.widget.CardView
-import android.view.ViewGroup
 
 
 
@@ -28,8 +22,10 @@ class MainActivity : AppCompatActivity()
         R.drawable.map to "Google Maps",
         R.drawable.bluetooth to "Bluetooth",
         R.drawable.shopping_bag to "In-App Purchase",
-        R.drawable.list to "Checklist",
-        R.drawable.watch to "Watch"
+        R.drawable.audio_video to "Media Players",
+        R.drawable.accelorometer to "Motion Sensors",
+        R.drawable.notification to "Notifications"
+
     )
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?)
