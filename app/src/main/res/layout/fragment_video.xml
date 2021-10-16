@@ -3,16 +3,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.VideoFragment">
+    tools:context=".views.VideoFragment"
+    android:background="@color/black">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="wrap_content"
-        android:layout_height="308dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:elevation="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom">
+
+        <ProgressBar
+            android:id="@+id/pbVideo"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="70"
+            android:layout_height="10dp"
+            android:progress="50"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/txtVideoTime"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="30"
+            android:text="0:00 / 3:24"
+            android:gravity="center_vertical"
+            android:autoSizeMaxTextSize="30sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutMediaController"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
+        >
+
+
+
+        <ImageButton
+            android:id="@+id/btnPausePlay"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/pause50"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent_white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageButton
+            android:id="@+id/btnForward"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/fastforward50"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent_white"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btnPausePlay"
+            android:layout_marginLeft="20dp"
+
+            />
+
+        <ImageButton
+            android:id="@+id/btnVolumeUpVideo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
+
+            android:layout_toRightOf="@+id/btnForward"
+            android:layout_marginLeft="20dp"
+            android:background="@color/transparent_white"
+            android:src="@drawable/volumeup50" />
+
+        <ImageButton
+            android:id="@+id/btnRewind"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/rewind50"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent_white"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btnPausePlay"
+            android:layout_marginRight="20dp"
+
+            />
+
+
+        <ImageButton
+            android:id="@+id/btnVolumeDownVideo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/volumedown50"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent_white"
+            android:layout_toLeftOf="@+id/btnRewind"
+            android:layout_marginRight="20dp"
+            />
+
+    </RelativeLayout>
+
+
 
 </FrameLayout>

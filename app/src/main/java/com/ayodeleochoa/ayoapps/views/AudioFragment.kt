@@ -1,11 +1,29 @@
 package com.ayodeleochoa.ayoapps.views
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.media.MediaPlayer.OnCompletionListener
+import android.media.MediaRecorder
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.ayodeleochoa.ayoapps.R
+import com.bumptech.glide.Glide
+import java.util.*
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +39,22 @@ class AudioFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var audioImage: ImageView
+    lateinit var buttonPausePlayAudio: ImageButton
+    lateinit var buttonRecordAudio: ImageButton
+    lateinit var mediaPlayer: MediaPlayer
+    var newPosition: Int = 0
+    lateinit var progressBar: ProgressBar
+    var duration: Int = 0
+    lateinit var timer: Timer
+    var textDuration: String = ""
+    lateinit var textAudioTime: TextView
+
+    var permissionToRecordAccepted = false
+    val REQUEST_RECORD_AUDIO_PERMISSION = 200
+    var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+
+    var recorder: MediaRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +68,198 @@ class AudioFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_audio, container, false)
+
+        val view = inflater.inflate(com.ayodeleochoa.ayoapps.R.layout.fragment_audio, container, false)
+
+        audioImage = view.findViewById(com.ayodeleochoa.ayoapps.R.id.imgAudio)
+        var audioGif = R.drawable.audio_gif
+        var audioPNG = R.drawable.audio_png
+
+        mediaPlayer = MediaPlayer.create(context, R.raw.aladdin)
+        progressBar = view.findViewById<ProgressBar>(com.ayodeleochoa.ayoapps.R.id.pbAudio)
+
+        duration = mediaPlayer.duration
+      //  println("duration = " + duration)
+        progressBar.max = duration
+        textAudioTime = view.findViewById<TextView>(com.ayodeleochoa.ayoapps.R.id.txtAudioTime)
+        // runProgressBar()
+
+        timer = Timer()
+        val task: TimerTask = object : TimerTask() {
+            override fun run() {
+                progressBar.progress = mediaPlayer.currentPosition
+                updateUI()
+            }
+        }
+        timer.schedule(task, 0, 500)
+        setDurationUI()
+
+        buttonPausePlayAudio = view.findViewById(com.ayodeleochoa.ayoapps.R.id.btnPausePlayAudio)
+        buttonPausePlayAudio.setOnClickListener {
+
+            if (mediaPlayer.isPlaying)
+            {
+                mediaPlayer.pause()
+                Glide.with(requireContext())
+                    .load(audioPNG)
+                    .into(audioImage)
+                buttonPausePlayAudio.setImageResource(R.drawable.play50)
+            }
+            else
+            {
+                mediaPlayer.start()
+                Glide.with(requireContext())
+                    .load(audioGif)
+                    .into(audioImage)
+                buttonPausePlayAudio.setImageResource(R.drawable.pause50)
+            }
+
+
+        }
+
+        mediaPlayer.setOnCompletionListener(OnCompletionListener {
+            Glide.with(requireContext())
+                .load(audioPNG)
+                .into(audioImage)
+            buttonPausePlayAudio.setImageResource(R.drawable.play50)
+        })
+
+        val buttonFastForwardAudio = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnForwardAudio)
+        buttonFastForwardAudio.setOnClickListener {
+            println("buttonFastForwardAudio pressed")
+            mediaPlayer.pause()
+            newPosition = mediaPlayer.getCurrentPosition() + 10000;
+            mediaPlayer.seekTo(newPosition)
+            mediaPlayer.start()
+            buttonPausePlayAudio.setImageResource(R.drawable.pause50)
+        }
+
+        val buttonRewindAudio = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnRewindAudio)
+        buttonRewindAudio.setOnClickListener {
+            mediaPlayer.pause()
+            newPosition = mediaPlayer.getCurrentPosition() - 10000;
+            mediaPlayer.seekTo(newPosition)
+            mediaPlayer.start()
+            buttonPausePlayAudio.setImageResource(R.drawable.pause50)
+        }
+
+        /*buttonRecordAudio = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnRecordAudio)
+        buttonRecordAudio.setOnClickListener {
+            println("Permission buttonRecordAudio pressed")
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.RECORD_AUDIO
+                ) != PackageManager.PERMISSION_GRANTED)
+             {
+                 println("Permission NOT granted")
+                 requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 100)
+            } else
+            {
+                println("Permission NOT granted")
+                startRecording();
+            }
+        }*/
+
+        val audioManager = activity?.applicationContext?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        val buttonVolumeUp = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnVolumeUpAudio)
+        buttonVolumeUp.setOnClickListener {
+            audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND)
+        }
+
+        val buttonVolumeDown = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnVolumeDownAudio)
+        buttonVolumeDown.setOnClickListener {
+            audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND)
+        }
+
+
+
+        return view
     }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out kotlin.String>, grantResults: IntArray): Unit {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+          //  startRecording()
+        }
+    }
+
+    private fun updateUI()
+    {
+        val currentSeconds  = mediaPlayer.currentPosition / 1000
+        val hours = currentSeconds / 3600
+        val minutes = currentSeconds / 60 - hours * 60
+        val seconds = currentSeconds - hours * 3600 - minutes * 60
+        var textCurrentSeconds = String.format("%02d:%02d / $textDuration", minutes, seconds)
+        textAudioTime.text = textCurrentSeconds
+    }
+
+    private fun setDurationUI()
+    {
+        val durationSeconds  = duration / 1000
+        val hours = durationSeconds / 3600
+        val minutes = durationSeconds / 60 - hours * 60
+        val seconds = durationSeconds - hours * 3600 - minutes * 60
+        textDuration = String.format("%02d:%02d", minutes, seconds)
+        //  textVideoTime.text = textDuration
+    }
+
+    /*@RequiresApi(Build.VERSION_CODES.S)
+    private fun startRecording()
+    {
+        println("startRecording")
+        // initialize and configure MediaRecorder
+
+        val output = Environment.getExternalStorageDirectory().absolutePath + File.separator + "recording.3gp"
+        println("Destination output: $output")
+      //  val output2 = "${externalCacheDir.absolutePath}/audiorecordtest.3gp"
+
+        var FileName = "recording.m4a"
+        val destDir = File(Environment.getExternalStorageDirectory().toString() + "/test/")
+        println()
+        if (!destDir.exists())
+        {
+            destDir.mkdirs()
+            println("Destination did not exist")
+        }
+        val FilePath = Environment.getExternalStorageDirectory().toString() + "/test/" + FileName
+        recorder = MediaRecorder()
+        recorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+        recorder!!.setOutputFile(output)
+        recorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        recorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+        try {
+            recorder!!.prepare()
+        } catch (e: IOException) {
+            // handle error
+        } catch (e: IllegalStateException) {
+            // handle error
+        }
+
+
+        recorder!!.start()
+    }*/
+
+    /*override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        } else {
+            false
+        }
+        if (!permissionToRecordAccepted)
+        {
+            Toast.makeText(requireContext(),"Permission to ",Toast.LENGTH_SHORT).show()
+        }
+    }*/
+
+
 
     companion object {
         /**

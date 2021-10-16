@@ -116,6 +116,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
    // implementation 'com.google.android.gms:play-services-places:11.8.0'
 
+    // ViewPager effects
+    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+
 
 
 

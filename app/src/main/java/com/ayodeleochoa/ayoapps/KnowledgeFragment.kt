@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.ayodeleochoa.ayoapps.views.AccelerometerActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -147,6 +148,46 @@ class DatabaseFragment : Fragment()
                 txtDescription.text = descriptionText
                 txtDescription2.text = descriptionText2
             }
+            else if (currentActivity == "AccelerometerActivity")
+            {
+                val descriptionText =
+                    "This exercise displays the use of Android's sensor capabilities, which include " +
+                            "motion, environmental and position sensors. Some sensors aren't available " +
+                            "on all devices so here we concentrate on the more common motion sensors: " +
+                            "TYPE_ACCELEROMETER and TYPE_STEP_COUNTER. Rotate your device to move the ball " +
+                            "in the direction of your device. Walk with device in your hand to accumulate " +
+                            "steps which can be viewed on the top left of the screen. "
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Motion Sensors \n" +
+                            "Accelerometer \n" +
+                            "Step Counter \n" +
+                            "AnimatedView \n" +
+                            "Paint \n" +
+                            "Android Permissions \n" +
+                            "Companion Object \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
+            else if (currentActivity == "MediaActivity")
+            {
+                val descriptionText =
+                    "This exercise displays the use of Android's media players. Control audio and video with embedded " +
+                            "players. Control the device's volume from within the application. "
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Video View \n" +
+                            "Media Player \n" +
+                            "Progress Bar \n" +
+                            "Tabbed Activity \n" +
+                            "Audio Manager \n" +
+                            "Timer \n" +
+                            "Android Permissions \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
 
             viewedDescription = true
 
@@ -158,6 +199,11 @@ class DatabaseFragment : Fragment()
                 {
                     (activity as PhotoGalleryActivity?)!!.setupViewModel()
                     (activity as PhotoGalleryActivity?)!!.setupObservers()
+                }
+                else if (currentActivity == "AccelerometerActivity")
+                {
+                    (activity as AccelerometerActivity?)!!.setAnimatedView()
+
                 }
 
                 val fragment = fragmentManager?.findFragmentById(R.id.knowledge_fragment)

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.CameraActivity">
+
+    <ImageView
+        android:id="@+id/imgCamera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/person"
+        android:scaleType="centerCrop"
+        />
+
+    <ImageButton
+        android:id="@+id/btnCamera"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/snap_camera"
+        android:scaleType="centerCrop"
+        android:background="@color/transparent_white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="SELECT FILTER"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/sky_blue"
+        android:textColor="@color/white"
+        android:layout_marginBottom="30dp" />
+
+
+
+
+</RelativeLayout>

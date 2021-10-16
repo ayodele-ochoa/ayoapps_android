@@ -10,6 +10,8 @@
     <color name="red">#FF0000</color>
     <color name="sky_blue">#4f90f7</color>
     <color name="high_yella">#feffa8</color>
+    <color name="transparent_white">#0000ffff</color>
+
 
 
 </resources>
