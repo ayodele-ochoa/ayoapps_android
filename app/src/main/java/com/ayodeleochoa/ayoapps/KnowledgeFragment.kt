@@ -188,6 +188,35 @@ class DatabaseFragment : Fragment()
                 txtDescription.text = descriptionText
                 txtDescription2.text = descriptionText2
             }
+            else if (currentActivity == "CameraActivity")
+            {
+                val descriptionText = "This exercise makes use of Android's Camera API to take photos and uses a plugin to " +
+                        "allow the user to add filters to the photo taken. Click on the camera icon to take a photo. " +
+                        "Select from the available filters to apply the chosen filter to your photo."
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Camera API \n" +
+                            "Mukeshsolanki Photo Filter \n" +
+                            "Imageviews \n" +
+                            "Bitmaps \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
+            else if (currentActivity == "AdmobActivity")
+            {
+                val descriptionText = "This exercise explores the banner and interstitial advertisement displays " +
+                        "from Admob. The banner ad remains on the bottom of the screen throughout. Click on the button 5 " +
+                        "times to display the interstitial ad. "
+                val descriptionText2 =
+                    "This exercise include the following features: \n \n" +
+                            "Admob \n" +
+                            "Banner Ad \n" +
+                            "Interstitial Ad \n" +
+                            "Fragments"
+                txtDescription.text = descriptionText
+                txtDescription2.text = descriptionText2
+            }
 
             viewedDescription = true
 

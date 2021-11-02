@@ -1,6 +1,5 @@
 package com.ayodeleochoa.ayoapps.views
 
-import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.media.AudioManager
@@ -51,8 +50,7 @@ class AudioFragment : Fragment() {
     lateinit var textAudioTime: TextView
 
     var permissionToRecordAccepted = false
-    val REQUEST_RECORD_AUDIO_PERMISSION = 200
-    var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+
 
     var recorder: MediaRecorder? = null
 
@@ -143,22 +141,6 @@ class AudioFragment : Fragment() {
             buttonPausePlayAudio.setImageResource(R.drawable.pause50)
         }
 
-        /*buttonRecordAudio = view.findViewById<ImageButton>(com.ayodeleochoa.ayoapps.R.id.btnRecordAudio)
-        buttonRecordAudio.setOnClickListener {
-            println("Permission buttonRecordAudio pressed")
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.RECORD_AUDIO
-                ) != PackageManager.PERMISSION_GRANTED)
-             {
-                 println("Permission NOT granted")
-                 requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 100)
-            } else
-            {
-                println("Permission NOT granted")
-                startRecording();
-            }
-        }*/
 
         val audioManager = activity?.applicationContext?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
@@ -242,22 +224,7 @@ class AudioFragment : Fragment() {
         recorder!!.start()
     }*/
 
-    /*override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
-        } else {
-            false
-        }
-        if (!permissionToRecordAccepted)
-        {
-            Toast.makeText(requireContext(),"Permission to ",Toast.LENGTH_SHORT).show()
-        }
-    }*/
+
 
 
 

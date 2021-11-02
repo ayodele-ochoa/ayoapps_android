@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity()
         R.drawable.image_gallery to "Image Gallery",
         R.drawable.map to "Google Maps",
         R.drawable.bluetooth to "Bluetooth",
-        R.drawable.shopping_bag to "In-App Purchase",
+        R.drawable.ads to "Advertisement",
         R.drawable.audio_video to "Media Players",
         R.drawable.accelorometer to "Motion Sensors",
         R.drawable.notification to "Notifications",

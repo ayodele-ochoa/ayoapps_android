@@ -4,41 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/high_yella"
     tools:context=".views.CameraActivity">
 
-    <ImageView
-        android:id="@+id/imgCamera"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/person"
-        android:scaleType="centerCrop"
+        android:orientation="vertical" >
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imgCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/person"
+            android:scaleType="fitCenter"
+            />
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:autoSizeMaxTextSize="30sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="TAKE PHOTO AND APPLY FILTERS"
+            android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnCamera"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/camera"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent_white"
+            android:layout_margin="10dp"
+            />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgFilter1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgFilter2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgFilter3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgFilter4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgFilter5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="10dp"
+                    />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/knowledge_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
-
-    <ImageButton
-        android:id="@+id/btnCamera"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/snap_camera"
-        android:scaleType="centerCrop"
-        android:background="@color/transparent_white"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="20dp"
-        />
-
-    <Button
-        android:id="@+id/btnFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:text="SELECT FILTER"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/sky_blue"
-        android:textColor="@color/white"
-        android:layout_marginBottom="30dp" />
-
-
-
 
 </RelativeLayout>

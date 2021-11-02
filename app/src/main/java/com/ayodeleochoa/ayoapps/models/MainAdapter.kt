@@ -1,8 +1,8 @@
 package com.ayodeleochoa.ayoapps.models
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +21,7 @@ class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter
 
 
     // create new views
+    @SuppressLint("ResourceAsColor")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
         // inflates the card_view_design view
@@ -35,7 +36,7 @@ class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter
         layoutParams.height = layoutParams.width
         view.layoutParams = layoutParams
 
-        view.setBackgroundColor(Color.LTGRAY)
+      //  view.setBackgroundColor(R.color.red)
         return ViewHolder(view)
     }
 
@@ -90,6 +91,13 @@ class MainAdapter(private val mList: List<MainViewModel>) : RecyclerView.Adapter
             val intent = Intent(activity.applicationContext, BluetoothActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             activity.applicationContext.startActivity(intent)
+
+            }
+            else if (position == 5)
+            {
+                val intent = Intent(activity.applicationContext, AdmobActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                activity.applicationContext.startActivity(intent)
 
             }
             else if (position == 6)

@@ -13,8 +13,8 @@ android {
         applicationId "com.ayodeleochoa.ayoapps"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.02"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,8 +46,8 @@ android {
 
 dependencies {
 
+    implementation "androidx.core:core-ktx:$core_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
@@ -118,6 +118,12 @@ dependencies {
 
     // ViewPager effects
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+
+    // Image Filters
+    implementation 'com.github.mukeshsolanki:photofilter:1.0.2'
+
+    //Admob Advertisement
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
 
 
 
